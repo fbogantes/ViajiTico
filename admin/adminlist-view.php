@@ -31,22 +31,22 @@
                         </thead>
                         <tbody>
                             <?php
-                                $mysqli = mysqli_connect(SERVER, USER, PASS, BD);
-                                mysqli_set_charset($mysqli, "utf8");
+                                $stid = oci_connect(SERVER, USER, PASS);
+                                //oci_set_charset($stid, "utf8");
 
                                 $pagina = isset($_GET['pag']) ? (int)$_GET['pag'] : 1;
                                 $regpagina = 30;
                                 $inicio = ($pagina > 1) ? (($pagina * $regpagina) - $regpagina) : 0;
 
-                                $administradores=mysqli_query($mysqli,"SELECT SQL_CALC_FOUND_ROWS * FROM administrador WHERE id!='1' LIMIT $inicio, $regpagina");
+                                $administradores=oci_parse($stid,"SELECT SQL_CALC_FOUND_ROWS * FROM administrador WHERE id!='1' LIMIT $inicio, $regpagina");
 
-                                $totalregistros = mysqli_query($mysqli,"SELECT FOUND_ROWS()");
-                                $totalregistros = mysqli_fetch_array($totalregistros, MYSQLI_ASSOC);
+                                $totalregistros = oci_parse($stid,"SELECT FOUND_ROWS()");
+                                $totalregistros = oci_fetch_array($totalregistros, OCI_ASSOC + OCI_RETURN_NULLS);
 
                                 $numeropaginas = ceil($totalregistros["FOUND_ROWS()"]/$regpagina);
 
                                 $cr=$inicio+1;
-                              while($adm=mysqli_fetch_array($administradores, MYSQLI_ASSOC)){
+                              while($adm=oci_fetch_array($administradores, OCI_ASSOC + OCI_RETURN_NULLS)){
                             ?>
                             <tr>
                                 <td class="text-center"><?php echo $cr; ?></td>

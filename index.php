@@ -61,9 +61,9 @@
                   include 'library/configServer.php';
                   include 'library/consulSQL.php';
                   $consulta= ejecutarSQL::consultar("SELECT * FROM producto WHERE Stock > 0 AND Estado='Activo' ORDER BY id DESC LIMIT 7");
-                  $totalproductos = mysqli_num_rows($consulta);
+                  $totalproductos = oci_num_rows($consulta);
                   if($totalproductos>0){
-                      while($fila=mysqli_fetch_array($consulta, MYSQLI_ASSOC)){
+                      while($fila=oci_fetch_array($consulta, OCI_ASSOC + OCI_RETURN_NULLS)){
                 ?>
                 <div class="col-xs-12 col-sm-6 col-md-4">
                      <div class="thumbnail">
