@@ -31,7 +31,7 @@
                         </thead>
                         <tbody>
                             <?php
-                                $stid = oci_connect(SERVER, USER, PASS);
+                                $stid = oci_connect(USER, PASS, SERVER);
                                 //oci_set_charset($stid, "utf8");
 
                                 $pagina = isset($_GET['pag']) ? (int)$_GET['pag'] : 1;
