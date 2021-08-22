@@ -5,8 +5,8 @@ class ejecutarSQL {
         if(!$conexion=  oci_connect(USER,PASS,SERVER)){
             echo "Error en el servidor, verifique sus datos";
         }
-        /* Codificar la información de la base de datos a UTF8*/
-        //mysqli_set_charset($conexion, "utf8");
+        /* Codificar la información de la base de datos a UTF8
+        mysqli_set_charset($conexion, "utf8");*/
         return $conexion;
         /*
         if (!$conexion) {    
