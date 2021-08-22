@@ -54,7 +54,7 @@
     <section id="new-prod-index">    
          <div class="container">
             <div class="page-header">
-                <h1>Últimos <small>productos agregados</small></h1>
+                <h1>Últimos <small>destinos agregados</small></h1>
             </div>
             <div class="row">
               	<?php
@@ -90,7 +90,7 @@
                 <?php
                      }   
                   }else{
-                      echo '<h2>No hay productos registrados en la tienda</h2>';
+                      echo '<h2>No hay destinos registrados en el sistema</h2>';
                   }  
               	?>  
             </div>
@@ -103,7 +103,7 @@
                    <article style="margin-top:5%;">
                         <p><i class="fa fa-users fa-4x"></i></p>
                         <h3>Registrate</h3>
-                        <p>Registrate como cliente de <span class="tittles-pages-logo">STORE</span> en un sencillo formulario para poder completar tus pedidos</p>
+                        <p>Registrate como cliente de <span class="tittles-pages-logo">ViajiTico</span> en un sencillo formulario para poder completar tus pedidos</p>
                         <p><a href="registration.php" class="btn btn-info btn-raised btn-block">Registrarse</a></p>   
                    </article>
                 </div>
