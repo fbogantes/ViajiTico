@@ -2,7 +2,7 @@
 /* Clase para ejecutar las consultas a la Base de Datos*/
 class ejecutarSQL {
     public static function conectar(){
-        if(!$conexion=  oci_connect(SERVER,USER,PASS)){
+        if(!$conexion=  oci_connect(USER,PASS,SERVER)){
             echo "Error en el servidor, verifique sus datos";
         }
         /* Codificar la información de la base de datos a UTF8*/
@@ -20,7 +20,6 @@ class ejecutarSQL {
 
     public static function consultar($query) {
         if (!$consul = oci_parse(ejecutarSQL::conectar(), $query)) {
-            oci_execute($consul);
             echo 'Error en la consulta SQL ejecutada';
         }
         return $consul;
@@ -49,34 +48,22 @@ class consultasSQL{
 
     /*------ Funcion para limpiar cadenas ------*/
     //funcion para evitar inyeccion SQL
-    public static function clean_string($cadena){
-        $cadena=trim($cadena); //elimina espacios en blanco
-        $cadena=stripslashes($cadena); //elimina los \
-        $cadena=str_ireplace("<script>", "", $cadena); //busca el <script> y lo elimina
-        $cadena=str_ireplace("</script>", "", $cadena);
-        $cadena=str_ireplace("<script src>", "", $cadena);
-        $cadena=str_ireplace("<script type=>", "", $cadena);
-        $cadena=str_ireplace("SELECT * FROM", "", $cadena);
-        $cadena=str_ireplace("DELETE FROM", "", $cadena);
-        $cadena=str_ireplace("INSERT INTO", "", $cadena);
-        $cadena=str_ireplace("DROP TABLE", "", $cadena);
-        $cadena=str_ireplace("DROP DATABASE", "", $cadena);
-        $cadena=str_ireplace("TRUNCATE TABLE", "", $cadena);
-        $cadena=str_ireplace("SHOW TABLES", "", $cadena);
-        $cadena=str_ireplace("SHOW DATABASES", "", $cadena);
-        $cadena=str_ireplace("<?php", "", $cadena);
-        $cadena=str_ireplace("?>", "", $cadena);
-        $cadena=str_ireplace("--", "", $cadena);
-        $cadena=str_ireplace(">", "", $cadena);
-        $cadena=str_ireplace("<", "", $cadena);
-        $cadena=str_ireplace("[", "", $cadena);
-        $cadena=str_ireplace("]", "", $cadena);
-        $cadena=str_ireplace("^", "", $cadena);
-        $cadena=str_ireplace("==", "", $cadena);
-        $cadena=str_ireplace(";", "", $cadena);
-        $cadena=str_ireplace("::", "", $cadena);
-        $cadena=stripslashes($cadena); 
-        $cadena=trim($cadena);
-        return $cadena;
+    public static function clean_string($val){
+        $val=trim($val);
+        $val=stripslashes($val);
+        $val=str_ireplace("<script>", "", $val);
+        $val=str_ireplace("</script>", "", $val);
+        $val=str_ireplace("<script src", "", $val);
+        $val=str_ireplace("<script type=", "", $val);
+        $val=str_ireplace("SELECT * FROM", "", $val);
+        $val=str_ireplace("DELETE FROM", "", $val);
+        $val=str_ireplace("INSERT INTO", "", $val);
+        $val=str_ireplace("--", "", $val);
+        $val=str_ireplace("^", "", $val);
+        $val=str_ireplace("[", "", $val);
+        $val=str_ireplace("]", "", $val);
+        $val=str_ireplace("==", "", $val);
+        $val=str_ireplace(";", "", $val);
+        return $val;
     }
 }

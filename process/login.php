@@ -4,15 +4,20 @@
     include '../library/consulSQL.php';
 
     $nombre=consultasSQL::clean_string($_POST['nombre-login']);
-    $clave=consultasSQL::clean_string(md5($_POST['clave-login']));
+    $clave=consultasSQL::clean_string($_POST['clave-login']);
     $radio=consultasSQL::clean_string($_POST['optionsRadios']);
     if($nombre!="" && $clave!=""){
         if($radio=="option2"){
-          $verAdmin=ejecutarSQL::consultar($conexion, "SELECT * FROM administrador WHERE Nombre=:pNombre AND Clave=:pClave");
-          oci_bind_by_name($verAdmin, ':pNombre', $nombre);
-          oci_bind_by_name($verAdmin, ':pClave', $clave);
-          oci_execute($verAdmin);
+          $verAdmin=ejecutarSQL::consultar('SELECT * FROM ADMINISTRADOR WHERE NOMBRE=:pNombre AND CLAVE=:pClave');
+          $pNombre = $nombre;
+          $pClave = $clave;
 
+          oci_bind_by_name($verAdmin, ':pNombre', $pNombre);
+          oci_bind_by_name($verAdmin, ':pClave', $pClave);
+          $resultado = oci_execute($verAdmin);
+
+          oci_free_statement($verAdmin); //cerrar sesion
+          
             $AdminC=oci_num_rows($verAdmin);
             if($AdminC>0){
                 $filaU=oci_fetch_array($verAdmin, OCI_ASSOC + OCI_RETURN_NULLS);
@@ -24,9 +29,11 @@
             }else{
               echo 'Error nombre o contraseña invalido';
             }
+            
+            oci_close(ejecutarSQL::conectar());
         }
         if($radio=="option1"){
-            $verUser=ejecutarSQL::consultar("SELECT * FROM cliente WHERE Nombre=:pNombre AND Clave=:pClave");
+            $verUser=ejecutarSQL::consultar($conexion,"SELECT * FROM cliente WHERE Nombre=:pNombre AND Clave=:pClave");
             oci_bind_by_name($verUser, ':pNombre', $nombre);
             oci_bind_by_name($verUser, ':pClave', $clave);
             oci_execute($verUser);
