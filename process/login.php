@@ -8,7 +8,9 @@
     $radio=consultasSQL::clean_string($_POST['optionsRadios']);
     if($nombre!="" && $clave!=""){
         if($radio=="option2"){
-          $verAdmin=ejecutarSQL::consultar('SELECT * FROM ADMINISTRADOR WHERE NOMBRE=:pNombre AND CLAVE=:pClave');
+
+            static  $verAdmin;
+          $verAdmin=ejecutarSQL::consultar('SELECT * FROM ADMINISTRADOR WHERE NOMBRE = :pNombre AND CLAVE = :pClave');
           $pNombre = $nombre;
           $pClave = $clave;
 
@@ -29,7 +31,7 @@
             }else{
               echo 'Error nombre o contraseña invalido';
             }
-            
+
             oci_close(ejecutarSQL::conectar());
         }
         if($radio=="option1"){
