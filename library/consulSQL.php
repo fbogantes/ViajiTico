@@ -7,14 +7,15 @@ class ejecutarSQL {
         }
         /* Codificar la información de la base de datos a UTF8*/
         //mysqli_set_charset($conexion, "utf8");
-    
+        return $conexion;
+        /*
         if (!$conexion) {    
             $m = oci_error();    
             echo $m['message'], "n";    
             exit; 
         } else {    
              return $conexion;
-        } 
+        } */
     }
 
     public static function consultar($query) {

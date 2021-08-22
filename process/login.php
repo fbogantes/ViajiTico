@@ -8,8 +8,11 @@
     $radio=consultasSQL::clean_string($_POST['optionsRadios']);
     if($nombre!="" && $clave!=""){
         if($radio=="option2"){
-          $verAdmin=ejecutarSQL::consultar("SELECT * FROM administrador WHERE Nombre='$nombre' AND Clave='$clave'");
-          
+          $verAdmin=ejecutarSQL::consultar($conexion, "SELECT * FROM administrador WHERE Nombre=:pNombre AND Clave=:pClave");
+          oci_bind_by_name($verAdmin, ':pNombre', $nombre);
+          oci_bind_by_name($verAdmin, ':pClave', $clave);
+          oci_execute($verAdmin);
+
             $AdminC=oci_num_rows($verAdmin);
             if($AdminC>0){
                 $filaU=oci_fetch_array($verAdmin, OCI_ASSOC + OCI_RETURN_NULLS);
@@ -23,7 +26,10 @@
             }
         }
         if($radio=="option1"){
-            $verUser=ejecutarSQL::consultar("SELECT * FROM cliente WHERE Nombre='$nombre' AND Clave='$clave'");
+            $verUser=ejecutarSQL::consultar("SELECT * FROM cliente WHERE Nombre=:pNombre AND Clave=:pClave");
+            oci_bind_by_name($verUser, ':pNombre', $nombre);
+            oci_bind_by_name($verUser, ':pClave', $clave);
+            oci_execute($verUser);
             $filaU=oci_fetch_array($verUser, OCI_ASSOC + OCI_RETURN_NULLS);
             $UserC=oci_num_rows($verUser);
             if($UserC>0){
