@@ -9,9 +9,10 @@
     if($nombre!="" && $clave!=""){
         if($radio=="option2"){
           $verAdmin=ejecutarSQL::consultar("SELECT * FROM administrador WHERE Nombre='$nombre' AND Clave='$clave'");
-            $AdminC=mysqli_num_rows($verAdmin);
+          
+            $AdminC=oci_num_rows($verAdmin);
             if($AdminC>0){
-                $filaU=mysqli_fetch_array($verAdmin, MYSQLI_ASSOC);
+                $filaU=oci_fetch_array($verAdmin, OCI_ASSOC + OCI_RETURN_NULLS);
                 $_SESSION['nombreAdmin']=$nombre;
                 $_SESSION['claveAdmin']=$clave;
                 $_SESSION['UserType']="Admin";
@@ -23,8 +24,8 @@
         }
         if($radio=="option1"){
             $verUser=ejecutarSQL::consultar("SELECT * FROM cliente WHERE Nombre='$nombre' AND Clave='$clave'");
-            $filaU=mysqli_fetch_array($verUser, MYSQLI_ASSOC);
-            $UserC=mysqli_num_rows($verUser);
+            $filaU=oci_fetch_array($verUser, OCI_ASSOC + OCI_RETURN_NULLS);
+            $UserC=oci_num_rows($verUser);
             if($UserC>0){
                 $_SESSION['nombreUser']=$nombre;
                 $_SESSION['claveUser']=$clave;
@@ -39,3 +40,4 @@
     }else{
         echo 'Error campo vacío<br>Intente nuevamente';
     }
+    

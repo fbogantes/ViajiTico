@@ -19,6 +19,7 @@ class ejecutarSQL {
 
     public static function consultar($query) {
         if (!$consul = oci_parse(ejecutarSQL::conectar(), $query)) {
+            oci_execute($consul);
             echo 'Error en la consulta SQL ejecutada';
         }
         return $consul;

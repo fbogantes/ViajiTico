@@ -38,7 +38,7 @@
                                 $regpagina = 30;
                                 $inicio = ($pagina > 1) ? (($pagina * $regpagina) - $regpagina) : 0;
 
-                                $administradores=oci_parse($conexion,"SELECT SQL_CALC_FOUND_ROWS * FROM administrador WHERE id!='1' LIMIT $inicio, $regpagina");
+                                $administradores=oci_parse($conexion,"SELECT SQL_CALC_FOUND_ROWS * FROM ADMINISTRADOR WHERE ID!='1' LIMIT $inicio, $regpagina");
                                 oci_execute($administradores);
                                 $totalregistros = oci_parse($conexion,"SELECT FOUND_ROWS()");
                                 oci_execute($totalregistros);
