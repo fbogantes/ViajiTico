@@ -24,22 +24,22 @@
                         </thead>
                         <tbody>
                             <?php
-                                $mysqli = mysqli_connect(SERVER, USER, PASS, BD);
-                                mysqli_set_charset($mysqli, "utf8");
+                                $conexion= oci_connect(USER, PASS, SERVER);
+                                //oci_set_charset($conexion, "utf8");
 
                                 $pagina = isset($_GET['pag']) ? (int)$_GET['pag'] : 1;
                                 $regpagina = 30;
                                 $inicio = ($pagina > 1) ? (($pagina * $regpagina) - $regpagina) : 0;
 
-                                $pedidos=mysqli_query($mysqli,"SELECT SQL_CALC_FOUND_ROWS * FROM venta LIMIT $inicio, $regpagina");
+                                $pedidos=oci_parse($conexion,"SELECT SQL_CALC_FOUND_ROWS * FROM venta LIMIT $inicio, $regpagina");
 
-                                $totalregistros = mysqli_query($mysqli,"SELECT FOUND_ROWS()");
-                                $totalregistros = mysqli_fetch_array($totalregistros, MYSQLI_ASSOC);
+                                $totalregistros = oci_parse($conexion,"SELECT FOUND_ROWS()");
+                                $totalregistros = oci_fetch_array($totalregistros, OCI_ASSOC + OCI_RETURN_NULLS);
 
                                 $numeropaginas = ceil($totalregistros["FOUND_ROWS()"]/$regpagina);
 
                                 $cr=$inicio+1;
-                              while($order=mysqli_fetch_array($pedidos, MYSQLI_ASSOC)){
+                              while($order=oci_fetch_array($pedidos, OCI_ASSOC + OCI_RETURN_NULLS)){
                             ?>
                             <tr>
                               <td class="text-center"><?php echo $cr; ?></td>
@@ -48,7 +48,7 @@
                             <td>
                                 <?php 
                                     $conUs= ejecutarSQL::consultar("SELECT Nombre FROM cliente WHERE NIT='".$order['NIT']."'");
-                                    $UsP=mysqli_fetch_array($conUs, MYSQLI_ASSOC);
+                                    $UsP=oci_fetch_array($conUs, OCI_ASSOC + OCI_RETURN_NULLS);
                                     echo $UsP['Nombre'];
                                 ?>
                             </td>

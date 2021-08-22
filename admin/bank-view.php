@@ -3,8 +3,8 @@
         <div class="col-xs-12">
             <?php
                 $bankAccount=ejecutarSQL::consultar("SELECT * FROM cuentabanco");
-                if(mysqli_num_rows($bankAccount)>=1){
-                  $bankD=mysqli_fetch_array($bankAccount, MYSQLI_ASSOC);
+                if(oci_num_rows($bankAccount)>=1){
+                  $bankD=oci_fetch_array($bankAccount, OCI_ASSOC + OCI_RETURN_NULLS);
             ?>
                   <div class="container-form-admin">
                   <form action="./process/updateBank.php" method="POST" role="form" class="form-content FormCatElec" data-form="update">

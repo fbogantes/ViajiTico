@@ -9,6 +9,7 @@
                 <?php
                 	$admin=ejecutarSQL::consultar("SELECT * FROM administrador WHERE id='".$_SESSION['adminID']."'");
                 	$dataAdmin=oci_fetch_array($admin, OCI_ASSOC + OCI_RETURN_NULLS);
+                    oci_close($conexion); 
                 ?>
                 <form action="./process/updateAdmin.php" method="POST" role="form" class="FormCatElec" data-form="update">
                 	<input type="hidden" name="admin-code" value="<?php echo $_SESSION['adminID']; ?>">

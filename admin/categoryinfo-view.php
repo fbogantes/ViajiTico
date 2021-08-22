@@ -19,7 +19,7 @@
                 <?php
                 	$code=$_GET['code'];
                 	$categoria=ejecutarSQL::consultar("SELECT * FROM categoria WHERE CodigoCat='$code'");
-                	$cate=mysqli_fetch_array($categoria, MYSQLI_ASSOC);
+                	$cate=oci_fetch_array($categoria, OCI_ASSOC + OCI_RETURN_NULLS);
                 ?>
                 <form action="./process/updateCategory.php" method="POST" class="FormCatElec" data-form="update">
                 	<input type="hidden" name="categ-code-old" value="<?php echo $cate['CodigoCat']; ?>">
