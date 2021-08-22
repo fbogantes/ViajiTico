@@ -32,14 +32,14 @@
             </div>
             <div class="col-sm-4">
                 <h4 class="text-footer" >Direccion</h4>
-                <p style="color: #FFF">El Salvador</p>
+                <p style="color: #FFF">Costa Rica</p>
                 <p style="color: #FFF">adipisicing elit</p>
                 <p style="font-size:20px" aria-hidden="true">  000 – 000000 / 000 – 000000</p>
-                <p class="fa fa-mobile" style="font-size:20px"  aria-hidden="true">  00000000 / 0000000</p> <a href="#" target="_blank" style="color: #5bc0de">envianos_un_mensaje</a></br>
-                E-mail: <a href="#" target="_blank" style="color: #5bc0de"> &nbsp; ejemplod@dominio.com</a>
+                <p class="fa fa-mobile" style="font-size:20px"  aria-hidden="true">  00000000 / 0000000</p> <a href="#" target="_blank" style="color: #1ABC9C">envianos_un_mensaje</a></br>
+                E-mail: <a href="#" target="_blank" style="color: #1ABC9C"> &nbsp; info@viajiTico.com</a>
             </div>
         </div>
     </div>
     <br><br><br>
-    <h5 class="text-center tittles-pages-logo text-footer">STORE &copy; 2021</h5>
+    <h5 class="text-center tittles-pages-logo text-footer">ViajiTico &copy; 2021</h5>
 </footer>

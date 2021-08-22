@@ -96,7 +96,7 @@ footer{
     padding: 40px 0px;
 }
 .text-footer{
-    color: #5bc0de;
+    color: #1ABC9C;
 }
 footer a{
     color: #fff;
@@ -163,7 +163,7 @@ footer a{
 #container-form{
     padding: 20px;
     border-radius: 7px;
-    border: 2px dashed lightblue;
+    border: 2px dashed rgb(173, 230, 211);
 }
 /* ========================================= configAdmin styles ======================================*/
 #container-page-configAdmin{

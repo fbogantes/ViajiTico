@@ -9,19 +9,16 @@
     if($nombre!="" && $clave!=""){
         if($radio=="option2"){
 
-            static  $verAdmin;
           $verAdmin=ejecutarSQL::consultar('SELECT * FROM ADMINISTRADOR WHERE NOMBRE = :pNombre AND CLAVE = :pClave');
           $pNombre = $nombre;
           $pClave = $clave;
-
           oci_bind_by_name($verAdmin, ':pNombre', $pNombre);
           oci_bind_by_name($verAdmin, ':pClave', $pClave);
-          $resultado = oci_execute($verAdmin);
-
+          oci_execute($verAdmin);
           oci_free_statement($verAdmin); //cerrar sesion
           
-            $AdminC=oci_num_rows($verAdmin);
-            if($AdminC>0){
+          $AdminC=oci_num_rows($verAdmin);
+            if(oci_num_rows($verAdmin)>0){
                 $filaU=oci_fetch_array($verAdmin, OCI_ASSOC + OCI_RETURN_NULLS);
                 $_SESSION['nombreAdmin']=$nombre;
                 $_SESSION['claveAdmin']=$clave;

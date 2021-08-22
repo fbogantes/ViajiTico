@@ -58,12 +58,16 @@ class consultasSQL{
         $val=str_ireplace("SELECT * FROM", "", $val);
         $val=str_ireplace("DELETE FROM", "", $val);
         $val=str_ireplace("INSERT INTO", "", $val);
+        $val=str_ireplace("DROP TABLE", "", $val);
+        $val=str_ireplace("DROP DATABASE", "", $val);
         $val=str_ireplace("--", "", $val);
         $val=str_ireplace("^", "", $val);
         $val=str_ireplace("[", "", $val);
         $val=str_ireplace("]", "", $val);
         $val=str_ireplace("==", "", $val);
         $val=str_ireplace(";", "", $val);
+        $val=stripslashes($val);
+        $val=trim($val);
         return $val;
     }
 }
