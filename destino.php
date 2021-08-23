@@ -5,7 +5,7 @@ include './library/consulSQL.php';
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Productos</title>
+    <title>Destino</title>
     <?php include './plantilla/link.php'; ?>
 </head>
 <body id="container-page-product">
@@ -14,25 +14,31 @@ include './library/consulSQL.php';
        <br>
         <div class="container">
             <div class="page-header">
-              <h1>PRODUCTOS <small class="tittles-pages-logo">ViajiTico</small></h1>
+              <h1>Destinos <small class="tittles-pages-logo">ViajiTico</small></h1>
             </div>
             <?php
-              $checkAllCat=ejecutarSQL::consultar("SELECT * FROM PROVINCIA");
-              if(oci_num_rows($checkAllCat)>=1):
+            session_start();
+            include_once './library/configServer.php';
+            include_once './library/consulSQL.php';
+
+            $categoriac = ejecutarSQL::consultar('SELECT * FROM DESTINO');
+            oci_execute($categoriac);
+              // $checkAllCat=ejecutarSQL::consultar("SELECT * FROM categoria");
+              // if(oci_num_rows($checkAllCat)>=1):
             ?>
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-xs-12 col-md-4">
                     <div class="dropdown">
                       <button class="btn btn-primary btn-raised dropdown-toggle" type="button" id="drpdowncategory" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Seleccione una categoría &nbsp;
+                        Seleccione un Destino &nbsp;
                         <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu" aria-labelledby="drpdowncategory">
                         <?php 
-                          while($cate=oci_fetch_array($checkAllCat, OCI_ASSOC + OCI_RETURN_NULLS)){
+                          while($dest=oci_fetch_array($categoriac, OCI_ASSOC + OCI_RETURN_NULLS)){
                               echo '
-                                <li><a href="product.php?categ='.$cate['CodigoCat'].'">'.$cate['Nombre'].'</a></li>
+                                <li><a href="destino.php?categ='.$dest['id_destino'].'">'.$dest['des_actividad'].'</a></li>
                                 <li role="separator" class="divider"></li>
                               ';
                           }
@@ -40,7 +46,7 @@ include './library/consulSQL.php';
                       </ul>
                     </div>
                   </div>
-                  <div class="col-xs-12 col-md-4 col-md-offset-4">
+                  <!-- <div class="col-xs-12 col-md-4 col-md-offset-4">
                     <form action="./search.php" method="GET">
                       <div class="form-group">
                         <div class="input-group">
@@ -52,7 +58,7 @@ include './library/consulSQL.php';
                         </div>
                       </div>
                     </form>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             <?php
@@ -61,17 +67,19 @@ include './library/consulSQL.php';
             ?>
               <div class="row">
                 <?php
+
+                 include_once './library/configServer.php';
+                 include_once './library/consulSQL.php';
                   $stid = oci_connect(SERVER, USER, PASS);
                   //oci_set_charset($stid, "utf8");
+
+                  
 
                   $pagina = isset($_GET['pag']) ? (int)$_GET['pag'] : 1;
                   $regpagina = 20;
                   $inicio = ($pagina > 1) ? (($pagina * $regpagina) - $regpagina) : 0;
 
-                  //$consultar_productos=oci_parse($stid,"SELECT SQL_CALC_FOUND_ROWS * FROM destino WHERE CodigoCat='$categoria' AND Stock > 0 AND Estado='Activo' LIMIT $inicio, $regpagina");
-                  $consultar_productos=oci_parse($stid,"SELECT * FROM destino where id_provincia = :pidProvincia");
-                  $pidProvincia = $provincia;
-                  oci_bind_by_name($consultar_productos, ':pidProvincia', $pidProvincia);
+                  $consultar_productos=oci_parse($stid,"SELECT SQL_CALC_FOUND_ROWS * FROM producto WHERE CodigoCat='$categoria' AND Stock > 0 AND Estado='Activo' LIMIT $inicio, $regpagina");
 
                   $selCat=ejecutarSQL::consultar("SELECT * FROM categoria WHERE CodigoCat='$categoria'");
                   $datCat=oci_fetch_array($selCat, OCI_ASSOC + OCI_RETURN_NULLS);
@@ -168,9 +176,9 @@ include './library/consulSQL.php';
                 }else{
                   echo '<h2 class="text-center">Por favor seleccione una categoría para empezar</h2>';
                 }
-              else:
-                echo '<h2 class="text-center">Lo sentimos, no hay productos ni categorías registradas en la tienda</h2>';
-              endif;
+              // else:
+                // echo '<h2 class="text-center">Lo sentimos, no hay productos ni categorías registradas en la tienda</h2>';
+              // endif;
             ?>
         </div>
     </section>
