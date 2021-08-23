@@ -15,15 +15,27 @@
           oci_bind_by_name($verAdmin, ':pNombre', $pNombre);
           oci_bind_by_name($verAdmin, ':pClave', $pClave);
           oci_execute($verAdmin);
+        
+        $listaArray  = array(0);
+        while (($row = oci_fetch($verAdmin)) != false) {
+            // foreach ($row as $item) {
 
-        while (($row = oci_fetch_array($verAdmin, OCI_ASSOC + OCI_RETURN_NULLS)) != false) {
-            foreach ($row as $item) {
-                ($item!==null?htmlentities($item, ENT_QUOTES|ENT_SUBSTITUTE):"");
-            }
-            $admin_array[] = array("ID"=>oci_result($stid, 'ID'),"NOMBRE"=>oci_result($stid, 'NOMBRE'),"CLAVE"=>oci_result($stid, 'CLAVE'));
+            //     //($item!==null?htmlentities($item, ENT_QUOTES|ENT_SUBSTITUTE):"");
+            // }
+            $id = oci_result($verAdmin, 'ID');
+            $nombre = oci_result($verAdmin, 'NOMBRE'); 
+            $clave = oci_result($verAdmin, 'CLAVE');
+            $x = array(
+                "ID"=>$id, 
+                "NOMBRE"=>$nombre, 
+                "CLAVE"=>$clave
+            );
+            array_push($listaArray, $x);
         }
+
+        $a = $listaArray;
           //oci_free_statement($verAdmin); //cerrar sesion
-        foreach($admin_array as $index => $value){
+        foreach($a as $index => $value){
             $id  = $value['ID'];
             $nombre  = $value['NOMBRE'];
             $clave = $value['CLAVE'];
@@ -40,7 +52,6 @@
             }else{
               echo 'Error nombre o contraseña invalido';
             }
-
             oci_close(ejecutarSQL::conectar());
         }
         if($radio=="option1"){
