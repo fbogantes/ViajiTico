@@ -29,25 +29,17 @@
             array_push($listaArray, $x);
         }
 
-        $a = $listaArray;
-          //oci_free_statement($verAdmin); //cerrar sesion
-        foreach($a as $index => $value){
-            $id  = $value['ID'];
-            $nombre  = $value['NOMBRE'];
-            $clave = $value['CLAVE'];
-        }
-
           $AdminC=oci_num_rows($verAdmin);
             if(oci_num_rows($verAdmin)>0){
-                $filaU=oci_fetch_array($verAdmin, OCI_ASSOC + OCI_RETURN_NULLS);
                 $_SESSION['nombreAdmin']=$nombre;
                 $_SESSION['claveAdmin']=$clave;
                 $_SESSION['UserType']="Admin";
-                $_SESSION['adminID']=$filaU['id'];
+                $_SESSION['adminID']=$id;
                 echo '<script> location.href="index.php"; </script>';
             }else{
               echo 'Error nombre o contraseña invalido';
             }
+            oci_free_statement($verAdmin);
             oci_close(ejecutarSQL::conectar());
         }
         if($radio=="option1"){
