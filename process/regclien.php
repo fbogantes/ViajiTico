@@ -1,4 +1,5 @@
 <?php
+
 include '../library/configServer.php';
 include '../library/consulSQL.php';
 
@@ -18,7 +19,7 @@ $pComentario=consultasSQL::clean_string($_POST['comentario']);
 
 if(!$pCedula=="" && !$pnombre=="" && !$papellido1=="" && !$papellido2=="" && !$dirCliente=="" && !$pTelefono=="" && !$pEmail=="" && !$fullnameCliente=="" && !$pdestino=="" && !$pIdioma=="" && !$pfecha=="" && !$pCantidad="" && !$pComentario=""){
     /*if($passCliente==$passCliente2){*/
-        $INSERTAR= ejecutarSQL::consultar('EXECUTE pack_insert.p_insert_reserva (to_date(:pFecha), :pDestino, :pNombre, :pApellido1, :pApellido2, :pCedula, :pIdioma, :pTelefono, :pEmail, :pCantidad, :pComentario)');
+        $INSERTAR = ejecutarSQL::consultar('EXECUTE pack_insert.p_insert_reserva (to_date(:pFecha), :pDestino, :pNombre, :pApellido1, :pApellido2, :pCedula, :pIdioma, :pTelefono, :pEmail, :pCantidad, :pComentario)');
         
         $fecha = $pfecha;
         $destino = $pdestino;
@@ -50,7 +51,7 @@ if(!$pCedula=="" && !$pnombre=="" && !$papellido1=="" && !$papellido2=="" && !$d
 
         if ($resultado) {
           echo '<script>
-                    swal({
+                    swal.fire({
                       title: "Registro completado",
                       text: "El registro se completó con éxito, ya puedes iniciar sesión en el sistema",
                       type: "success",
