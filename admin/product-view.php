@@ -72,9 +72,15 @@
                                 <label>Categoría</label>
                                 <select class="form-control" name="prod-categoria">
                                     <?php
-                                        $categoriac= ejecutarSQL::consultar("SELECT * FROM categoria");
-                                        while($catec=mysqli_fetch_array($categoriac, MYSQLI_ASSOC)){
-                                            echo '<option value="'.$catec['CodigoCat'].'">'.$catec['Nombre'].'</option>';
+                                        session_start();
+                                        include_once './library/configServer.php';
+                                        include_once './library/consulSQL.php';
+
+                                        $categoriac = ejecutarSQL::consultar('SELECT * FROM DESTINO');   
+                                        oci_execute($categoriac);
+                                       
+                                        while($catec=oci_fetch_array($categoriac, OCI_ASSOC)){
+                                          echo '<option value="'.$catec['ID_DESTINO'].'">'.$catec['DES_ACTIVIDAD'].'</option>';
                                         }
                                     ?>
                                 </select>

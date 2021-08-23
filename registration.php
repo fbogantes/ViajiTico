@@ -32,19 +32,25 @@
                               </div>
                               <div class="col-xs-12">
                                 <div class="form-group label-floating">
-                                  <label class="control-label"><i class="fa fa-address-card-o" aria-hidden="true"></i>&nbsp; Ingrese su número de DNI</label>
+                                  <label class="control-label"><i class="fa fa-address-card-o" aria-hidden="true"></i>&nbsp; Ingrese su número de Cedula</label>
                                   <input class="form-control" type="text" required name="clien-nit" pattern="[0-9]{1,15}" title="Ingrese su número de DNI. Solamente números" maxlength="15" >
                                 </div>
                               </div>
                               <div class="col-xs-12 col-sm-6">
                                 <div class="form-group label-floating">
-                                  <label class="control-label"><i class="fa fa-user"></i>&nbsp; Ingrese sus nombres</label>
+                                  <label class="control-label"><i class="fa fa-user"></i>&nbsp; Ingrese su nombre</label>
                                   <input class="form-control" type="text" required name="clien-fullname" title="Ingrese sus nombres (solamente letras)" pattern="[a-zA-Z ]{1,50}" maxlength="50">
                                 </div>
                               </div>
                               <div class="col-xs-12 col-sm-6">
                                 <div class="form-group label-floating">
-                                  <label class="control-label"><i class="fa fa-user"></i>&nbsp; Ingrese sus apellidos</label>
+                                  <label class="control-label"><i class="fa fa-user"></i>&nbsp; Primer apellidos</label>
+                                  <input class="form-control" type="text" required name="clien-lastname" title="Ingrese sus apellido (solamente letras)" pattern="[a-zA-Z ]{1,50}" maxlength="50">
+                                </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-6">
+                                <div class="form-group label-floating">
+                                  <label class="control-label"><i class="fa fa-user"></i>&nbsp; Segundo apellido</label>
                                   <input class="form-control" type="text" required name="clien-lastname" title="Ingrese sus apellido (solamente letras)" pattern="[a-zA-Z ]{1,50}" maxlength="50">
                                 </div>
                               </div>
@@ -60,30 +66,61 @@
                                     <input class="form-control" type="email" required name="clien-email" title="Ingrese la dirección de su Email" maxlength="50">
                                 </div>
                               </div>
+                              
                               <div class="col-xs-12">
-                                <div class="form-group label-floating">
-                                  <label class="control-label"><i class="fa fa-home"></i>&nbsp; Ingrese su dirección</label>
-                                  <input class="form-control" type="text" required name="clien-dir" title="Ingrese la direción en la reside actualmente" maxlength="100">
+                                <legend><i class="fa fa-calendar"></i> &nbsp; Datos de la Reserva</legend>
+                              </div>
+                              <div class="col-xs-12">
+                                <div class="form-group">
+                                  <label>Destino</label>
+                                    <select class="form-control" name="prod-categoria">
+                                        <?php
+                                              session_start();
+                                              include_once './library/configServer.php';
+                                              include_once './library/consulSQL.php';
+
+                                              $categoriac = ejecutarSQL::consultar('SELECT * FROM DESTINO');   
+                                              oci_execute($categoriac);
+                                             
+                                              while($catec=oci_fetch_array($categoriac, OCI_ASSOC)){
+                                                echo '<option value="'.$catec['ID_DESTINO'].'">'.$catec['DES_ACTIVIDAD'].'</option>';
+                                              }
+                                        ?>
+                                    </select>
+                                </div>
+                              </div>
+                              <div class="col-xs-12 col-md-4">
+                                <div class="form-group">
+                                  <label>Idioma Preferido:&nbsp;</label>
+                                  <span class="idIdioma">
+                                  <label for="lidiomaEspa">Espa&ntilde;ol</label>
+                                      <input id="Espa" type="radio" name="idioma" value="2021" checked="checked" />&nbsp;
+                                  <label for="lidiomaIngles">Ingl&#233;s</label>
+                                      <input id="Ingles" type="radio" name="idioma" value="2022" />
+                                  </span>
+                                </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-6 col-md-4">
+                                <div class="form-group">
+                                  <label>Fecha:&nbsp;</label>
+                                    <span class="idDate">
+                                    <input type="date" id="fecha" name="trip-start"
+                                        value="2021-08-24"
+                                        min="2021-08-19" max="2022-12-31">
+                                    </span>
+                                </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-6 col-md-4">
+                                <div class="form-group">
+                                  <label>Cantidad:&nbsp;</label></br>
+                                  <span class="idCantidad">
+                                  <input type="number" id="cantidad" name="cantidad" min="1" max="10">
+                                  </span>
                                 </div>
                               </div>
                               <div class="col-xs-12">
-                                <legend><i class="fa fa-lock"></i> &nbsp; Datos de la cuenta</legend>
-                              </div>
-                              <div class="col-xs-12">
                                 <div class="form-group label-floating">
-                                  <label class="control-label"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp; Ingrese su nombre de usuario</label>
-                                    <input class="form-control" type="text" required name="clien-name" title="Ingrese su nombre. Máximo 9 caracteres (solamente letras y numeros sin espacios)" pattern="[a-zA-Z0-9]{1,9}" maxlength="9">
-                                </div>
-                              </div>
-                              <div class="col-xs-12 col-sm-6">
-                                <div class="form-group label-floating">
-                                  <label class="control-label"><i class="fa fa-lock"></i>&nbsp; Introduzca una contraseña</label>
-                                  <input class="form-control" type="password" required name="clien-pass" title="Defina una contraseña para iniciar sesión">
-                                </div>
-                              </div>
-                              <div class="col-xs-12 col-sm-6">
-                                <div class="form-group label-floating">
-                                    <label class="control-label"><i class="fa fa-lock"></i>&nbsp; Repita la contraseña</label>
+                                    <label class="control-label">Cometario</label>
                                     <input class="form-control" type="password" required name="clien-pass2" title="Repita la contraseña">
                                 </div>
                               </div>
