@@ -18,10 +18,6 @@
         
         $listaArray  = array(0);
         while (($row = oci_fetch($verAdmin)) != false) {
-            // foreach ($row as $item) {
-
-            //     //($item!==null?htmlentities($item, ENT_QUOTES|ENT_SUBSTITUTE):"");
-            // }
             $id = oci_result($verAdmin, 'ID');
             $nombre = oci_result($verAdmin, 'NOMBRE'); 
             $clave = oci_result($verAdmin, 'CLAVE');
