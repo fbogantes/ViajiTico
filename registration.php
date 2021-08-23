@@ -39,7 +39,7 @@
                               <div class="col-xs-12 col-sm-6">
                                 <div class="form-group label-floating">
                                   <label class="control-label"><i class="fa fa-user"></i>&nbsp; Ingrese su nombre</label>
-                                  <input class="form-control" type="text" required name="clien-fullname" title="Ingrese sus nombres (solamente letras)" pattern="[a-zA-Z ]{1,50}" maxlength="50">
+                                  <input class="form-control" type="text" required name="clien-fullname" title="Ingrese su nombre (solamente letras)" pattern="[a-zA-Z ]{1,50}" maxlength="50">
                                 </div>
                               </div>
                               <div class="col-xs-12 col-sm-6">
@@ -51,7 +51,7 @@
                               <div class="col-xs-12 col-sm-6">
                                 <div class="form-group label-floating">
                                   <label class="control-label"><i class="fa fa-user"></i>&nbsp; Segundo apellido</label>
-                                  <input class="form-control" type="text" required name="clien-lastname" title="Ingrese sus apellido (solamente letras)" pattern="[a-zA-Z ]{1,50}" maxlength="50">
+                                  <input class="form-control" type="text" required name="clien-lastname2" title="Ingrese sus apellido (solamente letras)" pattern="[a-zA-Z ]{1,50}" maxlength="50">
                                 </div>
                               </div>
                               <div class="col-xs-12 col-sm-6">
@@ -72,7 +72,7 @@
                               <div class="col-xs-12">
                                 <div class="form-group">
                                   <label>Destino</label>
-                                    <select class="form-control" name="prod-categoria">
+                                    <select class="form-control" name="clien-destino">
                                         <?php
                                               session_start();
                                               include_once './library/configServer.php';
@@ -103,7 +103,7 @@
                                 <div class="form-group">
                                   <label>Fecha:&nbsp;</label>
                                     <span class="idDate">
-                                    <input type="date" id="fecha" name="trip-start"
+                                    <input type="date" id="fecha" name="fecha"
                                         value="2021-08-24"
                                         min="2021-08-19" max="2022-12-31">
                                     </span>
@@ -120,7 +120,7 @@
                               <div class="col-xs-12">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Cometario</label>
-                                    <input class="form-control" type="text" required name="clien-pass2" title="Repita la contraseña">
+                                    <input class="form-control" type="text" required name="comentario" title="Repita la contraseña">
                                 </div>
                               </div>
                             </div>
