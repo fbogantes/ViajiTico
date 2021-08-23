@@ -60,13 +60,12 @@
                                     <input class="form-control" type="tel" required name="clien-phone" maxlength="15" title="Ingrese su número telefónico. Mínimo 8 digitos máximo 15">
                                 </div>
                               </div>
-                              <div class="col-xs-12 col-sm-6">
+                              <div class="col-xs-12">
                                 <div class="form-group label-floating">
                                   <label class="control-label"><i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp; Ingrese su Email</label>
                                     <input class="form-control" type="email" required name="clien-email" title="Ingrese la dirección de su Email" maxlength="50">
                                 </div>
                               </div>
-                              
                               <div class="col-xs-12">
                                 <legend><i class="fa fa-calendar"></i> &nbsp; Datos de la Reserva</legend>
                               </div>
