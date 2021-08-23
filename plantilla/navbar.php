@@ -11,7 +11,7 @@
               <div class="contenedor-tabla pull-right">
                 <div class="contenedor-tr">
                   <a href="index.php" class="table-cell-td">Inicio</a>
-                  <a href="product.php" class="table-cell-td">Destinos</a>
+                  <a href="destino.php" class="table-cell-td">Destinos</a>
                   <?php
                       if(!$_SESSION['nombreAdmin']==""){
                           echo ' 
@@ -132,7 +132,7 @@
         <br><br>
         <ul class="list-unstyled text-center">
             <li><a href="index.php">Inicio</a></li>
-            <li><a href="product.php">Destinos</a></li>
+            <li><a href="destino.php">Destinos</a></li>
             <li><a href="carrito.php">Carrito</a></li>
             <?php 
                 if(!$_SESSION['nombreAdmin']==""){

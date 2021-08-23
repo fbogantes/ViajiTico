@@ -3,4 +3,5 @@
 define("SERVER", "localhost/orcl");
 define("USER", "ESTUDIANTE");
 define("PASS", "FIDE");
-//define("BD", "");
+// define("BD", "ADMINISTRADOR");
+?>
