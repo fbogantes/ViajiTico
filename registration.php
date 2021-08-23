@@ -121,7 +121,7 @@
                               <div class="col-xs-12">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Cometario</label>
-                                    <input class="form-control" type="text required name="clien-pass2" title="Repita la contraseña">
+                                    <input class="form-control" type="text" required name="clien-pass2" title="Repita la contraseña">
                                 </div>
                               </div>
                             </div>
