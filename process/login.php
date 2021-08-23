@@ -28,6 +28,7 @@
             $nombre  = $value['NOMBRE'];
             $clave = $value['CLAVE'];
         }
+
           $AdminC=oci_num_rows($verAdmin);
             if(oci_num_rows($verAdmin)>0){
                 $filaU=oci_fetch_array($verAdmin, OCI_ASSOC + OCI_RETURN_NULLS);
