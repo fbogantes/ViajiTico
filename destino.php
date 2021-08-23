@@ -17,7 +17,7 @@ include './library/consulSQL.php';
               <h1>PRODUCTOS <small class="tittles-pages-logo">ViajiTico</small></h1>
             </div>
             <?php
-              $checkAllCat=ejecutarSQL::consultar("SELECT * FROM categoria");
+              $checkAllCat=ejecutarSQL::consultar("SELECT * FROM PROVINCIA");
               if(oci_num_rows($checkAllCat)>=1):
             ?>
               <div class="container-fluid">
@@ -68,7 +68,10 @@ include './library/consulSQL.php';
                   $regpagina = 20;
                   $inicio = ($pagina > 1) ? (($pagina * $regpagina) - $regpagina) : 0;
 
-                  $consultar_productos=oci_parse($stid,"SELECT SQL_CALC_FOUND_ROWS * FROM producto WHERE CodigoCat='$categoria' AND Stock > 0 AND Estado='Activo' LIMIT $inicio, $regpagina");
+                  //$consultar_productos=oci_parse($stid,"SELECT SQL_CALC_FOUND_ROWS * FROM destino WHERE CodigoCat='$categoria' AND Stock > 0 AND Estado='Activo' LIMIT $inicio, $regpagina");
+                  $consultar_productos=oci_parse($stid,"SELECT * FROM destino where id_provincia = :pidProvincia");
+                  $pidProvincia = $provincia;
+                  oci_bind_by_name($consultar_productos, ':pidProvincia', $pidProvincia);
 
                   $selCat=ejecutarSQL::consultar("SELECT * FROM categoria WHERE CodigoCat='$categoria'");
                   $datCat=oci_fetch_array($selCat, OCI_ASSOC + OCI_RETURN_NULLS);
