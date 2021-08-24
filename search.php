@@ -40,23 +40,23 @@ include './library/consulSQL.php';
               <div class="container-fluid">
                 <div class="row">
                   <?php
-                    $mysqli = mysqli_connect(SERVER, USER, PASS, BD);
-                    mysqli_set_charset($mysqli, "utf8");
+                    $mysqli = oci_connect(SERVER, USER, PASS);
+                    //mysqli_set_charset($mysqli, "utf8");
 
                     $pagina = isset($_GET['pag']) ? (int)$_GET['pag'] : 1;
                     $regpagina = 20;
                     $inicio = ($pagina > 1) ? (($pagina * $regpagina) - $regpagina) : 0;
 
-                    $consultar_productos=mysqli_query($mysqli,"SELECT SQL_CALC_FOUND_ROWS * FROM producto WHERE NombreProd LIKE '%".$search."%' OR Modelo LIKE '%".$search."%' OR Marca LIKE '%".$search."%' LIMIT $inicio, $regpagina");
+                    $consultar_productos=oci_parse($mysqli,"SELECT SQL_CALC_FOUND_ROWS * FROM producto WHERE NombreProd LIKE '%".$search."%' OR Modelo LIKE '%".$search."%' OR Marca LIKE '%".$search."%' LIMIT $inicio, $regpagina");
 
-                    $totalregistros = mysqli_query($mysqli,"SELECT FOUND_ROWS()");
-                    $totalregistros = mysqli_fetch_array($totalregistros, MYSQLI_ASSOC);
+                    $totalregistros = oci_parse($mysqli,"SELECT FOUND_ROWS()");
+                    $totalregistros = oci_fetch_array($totalregistros, MYSQLI_ASSOC);
           
                     $numeropaginas = ceil($totalregistros["FOUND_ROWS()"]/$regpagina);
 
-                    if(mysqli_num_rows($consultar_productos)>=1){
+                    if(oci_num_rows($consultar_productos)>=1){
                       echo '<div class="col-xs-12"><h3 class="text-center">Se muestran los productos con el nombre, marca o modelo <strong>"'.$search.'"</strong></h3></div><br>';
-                      while($prod=mysqli_fetch_array($consultar_productos, MYSQLI_ASSOC)){
+                      while($prod=oci_fetch_array($consultar_productos, MYSQLI_ASSOC)){
                   ?>
                       <div class="col-xs-12 col-sm-6 col-md-4">
                            <div class="thumbnail">

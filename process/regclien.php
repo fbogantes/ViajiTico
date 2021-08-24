@@ -22,18 +22,18 @@ if(!$pCedula=="" && !$pnombre=="" && !$papellido1=="" && !$papellido2=="" && !$p
   
   /*if($passCliente==$passCliente2){*/
     $conexion = ejecutarSQL::conectar();
-        $INSERTAR =oci_parse($conexion,'EXECUTE pack_insert.p_insert_reserva (to_date(:pFecha), :pDestino, :pNombre, :pApellido1, :pApellido2, :pCedula, :pIdioma, :pTelefono, :pEmail, :pCantidad, :pComentario)');
+        $INSERTAR =oci_parse($conexion,"BEGIN pack_insert.p_insert_reserva (to_date(:pFecha, 'YYYY-MM-DD'), TO_NUMBER(:pDestino), :pNombre, :pApellido1, :pApellido2, :pCedula, TO_NUMBER(:pIdioma), :pTelefono, :pEmail, TO_NUMBER(:pCantidad), :pComentario); END;");
         
         $fecha = $pfecha;
-        $destino = $pdestino;
+        $destino = intval($pdestino);
         $nombre = $pnombre;
         $apellido1 = $papellido1;
         $apellido2 = $papellido2;
         $cedula = $pCedula;
-        $idioma = $pIdioma;
+        $idioma = intval($pIdioma);
         $telefono = $pTelefono;
         $email = $pEmail;
-        $cantidad = $pCantidad;
+        $cantidad = intval($pCantidad);
         $comentario = $pComentario;
 
         oci_bind_by_name($INSERTAR, ':pFecha', $fecha);
@@ -48,12 +48,10 @@ if(!$pCedula=="" && !$pnombre=="" && !$papellido1=="" && !$papellido2=="" && !$p
         oci_bind_by_name($INSERTAR, ':pCantidad', $cantidad);
         oci_bind_by_name($INSERTAR, ':pComentario', $comentario);
 
-        
-        //$resultado = 
-        oci_execute($INSERTAR); //commit
+        $resultado = oci_execute($INSERTAR); //commit
+        oci_commit($conexion); 
 
-
-        if ($resultado) {
+        if ($resultado){
           echo '<script>
                     swal.fire({
                       title: "Registro completado",
@@ -74,6 +72,8 @@ if(!$pCedula=="" && !$pnombre=="" && !$papellido1=="" && !$papellido2=="" && !$p
                       }
                     });
                 </script>';
+        }else{
+          echo '<p>Error insercion de datos!</p>';
         }
 
         oci_free_statement($INSERTAR); //cerrar sesion

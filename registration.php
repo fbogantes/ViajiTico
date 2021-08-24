@@ -84,7 +84,7 @@
                                               oci_execute($categoriac);
                                              
                                               while($catec=oci_fetch_array($categoriac, OCI_ASSOC)){
-                                                echo '<option value="'.$catec['ID_DESTINO'].'">'.$catec['DES_ACTIVIDAD'].'</option>';
+                                                echo '<option type="number" value="'.$catec['ID_DESTINO'].'">'.$catec['DES_ACTIVIDAD'].'</option>';
                                               }
                                         ?>
                                     </select>
@@ -106,7 +106,7 @@
                                   <label>Fecha:&nbsp;</label>
                                     <span class="idDate">
                                     <input type="date" id="fecha" name="fecha"
-                                        value="2021-08-24"
+                                        value="2021-08-23"
                                         min="2021-08-19" max="2022-12-31">
                                     </span>
                                 </div>
