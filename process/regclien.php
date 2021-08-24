@@ -1,25 +1,28 @@
 <?php
-
+session_start();
 include '../library/configServer.php';
 include '../library/consulSQL.php';
 
-$pCedula=consultasSQL::clean_string($_POST['clien-nit']);
-$pnombre=consultasSQL::clean_string($_POST['clien-name']);
-$fullnameCliente=consultasSQL::clean_string($_POST['clien-fullname']);
-$papellido1=consultasSQL::clean_string($_POST['clien-lastname']);
-$papellido2=consultasSQL::clean_string($_POST['clien-lastname2']);
-$dirCliente=consultasSQL::clean_string($_POST['clien-dir']);
-$pTelefono=consultasSQL::clean_string($_POST['clien-phone']);
-$pEmail=consultasSQL::clean_string($_POST['clien-email']);
-$pdestino=consultasSQL::clean_string($_POST['clien-destino']);
+$pCedula=consultasSQL::clean_string($_POST['cliennit']);
+$pnombre=consultasSQL::clean_string($_POST['clienfullname']);
+//$fullnameCliente=consultasSQL::clean_string($_POST['']);
+$papellido1=consultasSQL::clean_string($_POST['clienlastname']);
+$papellido2=consultasSQL::clean_string($_POST['clienlastname2']);
+//$dirCliente=consultasSQL::clean_string($_POST['clien_dir']);
+$pTelefono=consultasSQL::clean_string($_POST['clienphone']);
+$pEmail=consultasSQL::clean_string($_POST['clienemail']);
+$pdestino=consultasSQL::clean_string($_POST['cliendestino']);
 $pIdioma=consultasSQL::clean_string($_POST['idioma']);
 $pfecha=consultasSQL::clean_string($_POST['fecha']);
 $pCantidad=consultasSQL::clean_string($_POST['cantidad']);
 $pComentario=consultasSQL::clean_string($_POST['comentario']);
 
-if(!$pCedula=="" && !$pnombre=="" && !$papellido1=="" && !$papellido2=="" && !$dirCliente=="" && !$pTelefono=="" && !$pEmail=="" && !$fullnameCliente=="" && !$pdestino=="" && !$pIdioma=="" && !$pfecha=="" && !$pCantidad="" && !$pComentario=""){
-    /*if($passCliente==$passCliente2){*/
-        $INSERTAR = ejecutarSQL::consultar('EXECUTE pack_insert.p_insert_reserva (to_date(:pFecha), :pDestino, :pNombre, :pApellido1, :pApellido2, :pCedula, :pIdioma, :pTelefono, :pEmail, :pCantidad, :pComentario)');
+if(!$pCedula=="" && !$pnombre=="" && !$papellido1=="" && !$papellido2=="" && !$pTelefono=="" && !$pEmail=="" && !$pdestino=="" && !$pIdioma=="" && !$pfecha=="" && !$pCantidad=="" && !$pComentario==""){
+  // !$pCedula=="" && !$pnombre=="" && !$papellido1=="" && !$papellido2=="" && !$dirCliente=="" && !$pTelefono=="" && !$pEmail=="" && !$fullnameCliente=="" && !$pdestino=="" && !$pIdioma=="" && !$pfecha=="" && !$pCantidad="" && !$pComentario=""
+  
+  /*if($passCliente==$passCliente2){*/
+    $conexion = ejecutarSQL::conectar();
+        $INSERTAR =oci_parse($conexion,'EXECUTE pack_insert.p_insert_reserva (to_date(:pFecha), :pDestino, :pNombre, :pApellido1, :pApellido2, :pCedula, :pIdioma, :pTelefono, :pEmail, :pCantidad, :pComentario)');
         
         $fecha = $pfecha;
         $destino = $pdestino;
@@ -46,7 +49,8 @@ if(!$pCedula=="" && !$pnombre=="" && !$papellido1=="" && !$papellido2=="" && !$d
         oci_bind_by_name($INSERTAR, ':pComentario', $comentario);
 
         
-        $resultado = oci_execute($INSERTAR); //commit
+        //$resultado = 
+        oci_execute($INSERTAR); //commit
 
 
         if ($resultado) {

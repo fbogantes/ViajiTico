@@ -3,6 +3,7 @@
 <head>
     <title>Registro</title>
     <?php include './plantilla/link.php'; ?>
+    <script src="js/validacion.js" defer></script> 
 </head>
 <body id="container-page-registration">
     <?php include './plantilla/navbar.php'; ?>
@@ -33,37 +34,37 @@
                               <div class="col-xs-12">
                                 <div class="form-group label-floating">
                                   <label class="control-label"><i class="fa fa-address-card-o" aria-hidden="true"></i>&nbsp; Ingrese su número de Cedula</label>
-                                  <input class="form-control" type="text" required name="clien-nit" pattern="[0-9]{1,15}" title="Ingrese su número de DNI. Solamente números" maxlength="15" >
+                                  <input class="form-control" type="text" required name="cliennit" pattern="[0-9]{1,15}" title="Ingrese su número de DNI. Solamente números" maxlength="15" >
                                 </div>
                               </div>
                               <div class="col-xs-12 col-sm-6">
                                 <div class="form-group label-floating">
                                   <label class="control-label"><i class="fa fa-user"></i>&nbsp; Ingrese su nombre</label>
-                                  <input class="form-control" type="text" required name="clien-fullname" title="Ingrese su nombre (solamente letras)" pattern="[a-zA-Z ]{1,50}" maxlength="50">
+                                  <input class="form-control" type="text" required name="clienfullname" title="Ingrese su nombre (solamente letras)" pattern="[a-zA-Z ]{1,50}" maxlength="50">
                                 </div>
                               </div>
                               <div class="col-xs-12 col-sm-6">
                                 <div class="form-group label-floating">
                                   <label class="control-label"><i class="fa fa-user"></i>&nbsp; Primer apellidos</label>
-                                  <input class="form-control" type="text" required name="clien-lastname" title="Ingrese sus apellido (solamente letras)" pattern="[a-zA-Z ]{1,50}" maxlength="50">
+                                  <input class="form-control" type="text" required name="clienlastname" title="Ingrese sus apellido (solamente letras)" pattern="[a-zA-Z ]{1,50}" maxlength="50">
                                 </div>
                               </div>
                               <div class="col-xs-12 col-sm-6">
                                 <div class="form-group label-floating">
                                   <label class="control-label"><i class="fa fa-user"></i>&nbsp; Segundo apellido</label>
-                                  <input class="form-control" type="text" required name="clien-lastname2" title="Ingrese sus apellido (solamente letras)" pattern="[a-zA-Z ]{1,50}" maxlength="50">
+                                  <input class="form-control" type="text" required name="clienlastname2" title="Ingrese sus apellido (solamente letras)" pattern="[a-zA-Z ]{1,50}" maxlength="50">
                                 </div>
                               </div>
                               <div class="col-xs-12 col-sm-6">
                                 <div class="form-group label-floating">
                                   <label class="control-label"><i class="fa fa-mobile"></i>&nbsp; Ingrese su número telefónico</label>
-                                    <input class="form-control" type="tel" required name="clien-phone" maxlength="15" title="Ingrese su número telefónico. Mínimo 8 digitos máximo 15">
+                                    <input class="form-control" type="tel" required name="clienphone" maxlength="15" title="Ingrese su número telefónico. Mínimo 8 digitos máximo 15">
                                 </div>
                               </div>
                               <div class="col-xs-12">
                                 <div class="form-group label-floating">
                                   <label class="control-label"><i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp; Ingrese su Email</label>
-                                    <input class="form-control" type="email" required name="clien-email" title="Ingrese la dirección de su Email" maxlength="50">
+                                    <input class="form-control" type="email" required name="clienemail" title="Ingrese la dirección de su Email" maxlength="50">
                                 </div>
                               </div>
                               <div class="col-xs-12">
@@ -72,9 +73,10 @@
                               <div class="col-xs-12">
                                 <div class="form-group">
                                   <label>Destino</label>
-                                    <select class="form-control" name="clien-destino">
+                                    <select class="form-control" name="cliendestino">
                                         <?php
                                               session_start();
+
                                               include_once './library/configServer.php';
                                               include_once './library/consulSQL.php';
 
@@ -93,9 +95,9 @@
                                   <label>Idioma Preferido:&nbsp;</label>
                                   <span class="idIdioma">
                                   <label for="lidiomaEspa">Espa&ntilde;ol</label>
-                                      <input id="Espa" type="radio" name="idioma" value="2021" checked="checked" />&nbsp;
+                                      <input id="Espa" type="radio" name="idioma" value="1" checked="checked" />&nbsp;
                                   <label for="lidiomaIngles">Ingl&#233;s</label>
-                                      <input id="Ingles" type="radio" name="idioma" value="2022" />
+                                      <input id="Ingles" type="radio" name="idioma" value="2" />
                                   </span>
                                 </div>
                               </div>
